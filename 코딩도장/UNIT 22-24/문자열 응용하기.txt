@@ -1,0 +1,180 @@
+# 문자열 바꾸기 : replace
+'Hello, world!'.replace('world', 'Python')
+
+s = 'Hello, world!'
+s = s.replace('world', 'Python')
+
+# 문자 바꾸기 : str.maketrans('바꿀문자', '새문자'), translate(테이블)
+table = str.maketrans('aeiou', '12345')
+'apple'.translate(table)
+
+# 문자열 분리하기 : split(), split('기준문자열')
+'apple pear grape pineapple orange'.split()
+'apple, pear, grape, pineapple, orange'.split(', ')
+
+# 구분자 문자열과 문자열 리스트 연결하기 : join(리스트)
+' '.join(['apple', 'pear', 'grape', 'pineapple', 'orange'])
+'-'.join(['apple', 'pear', 'grape', 'pineapple', 'orange'])
+
+
+# 소문자를 대문자로 바꾸기 : upper()
+'python'.upper()
+# 대문자를 소문자로 바꾸기 : lower()
+'PYTHON'.lower()
+
+
+# 왼쪽 공백 삭제하기 : lstrip()
+'    Python    '.lstrip()
+# 오른쪽 공백 삭제하기 : rstrip()
+'    Python    '.rstrip()
+# 모든 공백 삭제하기 : strip()
+'    Python    '.strip()
+
+
+# 왼쪽의 특정 문자 삭제하기 : lstrip('삭제할문자들')
+', python.'.lstrip(',.')
+# 오른쪽의 특정 문자 삭제하기 : rstrip('삭제할문자들')
+', python.'.rstrip(',.')
+# 양쪽의 특정 문자 삭제하기 : strip('삭제할문자들')
+', python.'.strip(',.')
+# 구두점을 간단하게 삭제하기
+import string
+', python.'.strip(string.punctuation)
+string.punctuation
+
+', python.'.strip(string.punctuation + ' ')
+', python.'.strip(string.punctuation).strip() : 메서드 체이닝(Method Chaining)
+
+
+# 문자열을 왼쪽 정렬하기 : ljust(길이)
+'python'.ljust(10)
+# 문자열을 오른쪽 정렬하기 : rjust(길이)
+'python'.rjust(10)
+# 문자열을 가운데 정렬하기 : center(길이)
+'python'.center(10)
+
+
+# 메서드 체이닝(Method Chaining)
+'python'.rjust(10).upper()
+
+
+# 문자열 왼쪽에 0 채우기 : zfill(길이) 
+-> zero fill, 문자열의 길이보다 지정된 길이가 짧으면 아무것도 채우지 않음
+'35'.zfill(4)
+'3.5'.zfill(6)
+'hello'.zfill(10)
+
+
+# 문자열 위치 찾기(왼쪽에서부터) : find('찾을문자열') 
+-> 찾을 문자열이 없을 시 -1 반환 / 먼저 나오는 문자열의 인덱스 반환
+'apple pineapple'.find('pl')
+'apple pineapple'.find('xy')
+# 오른쪽에서부터 문자열 위치 찾기 : rfind('찾을문자열')
+'apple pineapple'.rfind('pl')
+'apple pineapple'.rfind('xy')
+
+# 문자열 위치 찾기 : find, rfind, index, rindex
+'apple pineapple'.index('pl')
+# 오른쪽에서부터 문자열 위치 찾기 : rindex
+'apple pineapple'.rindex('pl')
+
+
+# 문자열 개수 세기 : count('문자열')
+'apple pineapple'.count('pl')
+
+
+
+
+
+
+# 문자열 서식 지정자와 포매팅 사용하기 
+: 서식 지정자(format specifier), 포매팅(string formatting)
+
+# 서식 지정자로 문자열 넣기 : '%s' % '문자열'
+'I am %s.' % 'james'
+
+name = 'maria'
+'I am %s.' % name
+
+# 서식 지정자로 숫자 넣기 : '%d' % 숫자
+'I am %d years old.' % 20
+
+# 서식 지정자로 소수점 표현하기 : '%f' % 숫자, '%.자릿수f' % 숫자
+'%f' % 2.3
+'%.2f' % 2.3
+'%.3f' % 2.3
+
+# 서식 지정자로 문자열 정렬하기(오른쪽) : %길이s
+'%10s' % 'python'
+
+'%10d' % 150
+'%10d' % 15000
+
+'%10.2f' % 2.3
+'%10.2f' % 2000.3
+
+# 서식 지정자로 문자열 정렬하기(왼쪽) : %-길이s
+'%-10s' % 'python'
+
+# 서식 지정자로 문자열 안에 값 여러 개 넣기 : '%d %s' % (숫자, '문자열')
+'Today is %d %s.' % (3, 'April')
+'Today is %d%s.' % (3, 'April')
+
+
+
+# format 메서드 사용하기
+'{인덱스}'.format(값)
+
+'Hello, {0}'.format('world!')
+'Hello, {0}'.format(100)
+
+# format 메서드로 값을 여러 개 넣기
+'Hello, {0} {2} {1}'.format('Python', 'Script', 3.6)
+
+# format 메서드로 같은 값을 여러 개 넣기
+'{0} {0} {1} {1}'.format('Python', 'Script')
+
+# format 메서드에서 인덱스 생략하기
+'Hello, {} {} {}'.format('Python', 'Script', 3.6)
+
+# format 메서드에서 인덱스 대신 이름 지정하기
+'Hello, {language} {version}'.format(language='Python', version=3.6)
+
+# 문자열 포매팅에 변수를 그대로 사용하기
+language = 'Python'
+version = 3.6
+f'Hello, {language} {version}'
+
+# format 메서드로 문자열 정렬하기 : '{인덱스:<길이}'.format(값)
+'{0:<10}'.format('python') : 오른쪽
+'{0:>10}'.format('python') : 왼쪽
+'{:>10}'.format('python')
+
+# 숫자 개수 맞추기
+'%0개수d' % 숫자
+'{인덱스:0개수d}'.format(숫자)
+'%03d' % 1
+'{0:03d}'.format(35)
+'{:03d}'.format(35)
+
+'%0개수.자릿수f' % 숫자
+'{인덱스:0개수.자릿수f}'.format(숫자)
+'%08.2f' % 3.6
+'{0:08.2f}'.format(150.37)
+'{:08.2f}'.format(150.37)
+
+# 채우기와 정렬을 조합해서 사용하기
+'{인덱스:[[채우기]정렬][길이][.자릿수][자료형]}'
+'{0:0<10}'.format(15)
+'{0:0>10}'.format(15)
+'{0:0>10.2f}'.format(15)
+'{0: >10}'.format(15)
+'{0:>10}'.format(15)
+'{0:x>10}'.format(15)
+
+# 금액에서 천단위로 콤마 넣기
+format(1493500, ',')
+'%20s' % format(1493500, ',')
+'{0:,}'.format(1493500)
+'{0:>20,}'.format(1493500)
+'{0:0>20,}'.format(1493500)
