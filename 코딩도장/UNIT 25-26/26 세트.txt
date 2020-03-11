@@ -1,0 +1,235 @@
+세트(set) 자료형 : 집합 - 합집합, 교집합, 차집합 등 연산 가능
+
+26.1 세트 만들기
+
+- 세트 = {값1, 값2, 값3}
+
+fruits = {'strawberry', 'grape', 'orange', 'pineapple', 'cherry'}
+fruits
+
+- 요소 순서가 없음(unordered)
+- 요소 중복 안됨
+
+fruits = {'strawberry', 'grape', 'strawberry'}
+fruits
+
+- [] 특정 요소 출력 불가능
+
+print(fruits[0]) # error
+
+
+26.1.1 세트에 특정 값이 있는지 확인하기
+
+- 값 in 세트
+- 값 not in 세트
+
+
+26.1.2 set를 사용하여 세트 만들기
+
+- set(반복가능한객체) : iterable
+
+a = set('apple')
+a
+b = set(range(5))
+b
+c = set()
+c
+d = {} # 빈 딕셔너리
+
+>>> type(a)
+<class 'set'>
+>>> type(b)
+<class 'set'>
+>>> type(c)
+<class 'set'>
+>>> type(d)
+<class 'dict'>
+
+set('안녕하세요')
+
+- 세트 안에 세트 넣기 : 불가능
+- 프로즌세트 = frozenset(iterable)
+- 프로즌세트는 세트 안에 세트 넣기 가능
+
+a = frozenset(range(10))
+
+
+
+26.2 집합 연산 사용하기
+
+- 세트1 | 세트2
+- set.union(세트1, 세트2)
+
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+a | b
+set.union(a, b)
+
+
+- 세트1 & 세트2
+- set.intersection(세트1, 세트2)
+
+a & b
+set.intersection(a, b)
+
+
+- 세트1 - 세트2
+- set.difference(a, b
+
+a - b
+set.difference(a, b)
+
+
+- 세트1 ^ 세트2
+- set.symmetric_difference(세트1, 세트2)
+
+a ^ b
+set.symmetric_difference(a, b)
+
+
+
+26.2.1 집합 연산 후 할당 연산자 사용하기
+
+- 세트1 |= 세트2
+- 세트1.update(세트2)
+
+a = {1, 2, 3, 4}
+a |= {5}
+a
+
+a = {1, 2, 3, 4}
+a.update({5})
+a
+
+
+- 세트1 &= 세트2
+- 세트1.intersection_update(세트2)
+
+a = {1, 2, 3, 4}
+a &= {0, 1, 2, 3, 4}
+a
+
+a = {1, 2, 3, 4}
+a.intersection_update({0, 1, 2, 3, 4})
+a
+
+
+- 세트1-=세트2
+- 세트1.difference_update(세트2)
+
+a = {1, 2, 3, 4}
+a -= {3}
+a
+
+a = {1, 2, 3, 4}
+a.difference_update({3})
+a
+
+
+- 세트1 ^= 세트2
+- 세트1.symmetric_difference_update(세트2)
+
+a = {1, 2, 3, 4}
+a ^= {3, 4, 5, 6}
+a
+
+a = {1, 2, 3, 4}
+a.symmetric_difference_update({3, 4, 5, 6})
+a
+
+
+
+
+26.2.2 부분 집합과 상위집합 확인하기
+
+- 부분집합 확인
+- 현재세트 <= 다른세트
+- 현재세트.issubset(다른세트)
+
+a = {1, 2, 3, 4}
+a <= {1, 2, 3, 4}
+a.issubset({1, 2, 3, 4, 5})
+
+- 진부분집합 확인
+- 현재세트 < 다른세트
+
+a = {1, 2, 3, 4}
+a < {1, 2, 3, 4, 5}
+
+- 상위집합 확인
+- 현재세트 >= 다른세트
+- 현재세트.superset(다른세트)
+
+a = {1, 2, 3, 4}
+a >= {1, 2, 3, 4}
+a.superset({1, 2, 3, 4})
+
+- 진상위집합 확인
+- 현재세트 > 다른세트
+
+a = {1, 2, 3, 4}
+a > {1, 2, 3}
+
+
+26.2.3 세트가 같은지 다른지 확인하기 : ==, !=
+
+
+26.2.4 세트가 겹치지 않는지 확인하기
+
+- 현재세트.isdisjoint(다른세트)
+
+a = {1, 2, 3, 4}
+a.isdisjoint({5, 6, 7, 8}) # True : 겹쳐지지 않음
+a.isdisjoint({3, 4, 5, 6}) # False : 3, 4가 겹침
+
+
+26.3 세트 조작하기
+26.3.1 세트에 요소를 추가하기 : add(요소)
+a = {1, 2, 3, 4}
+a.add(5)
+a
+
+26.3.2 세트에서 특정 요소를 삭제하기 : remove(), discard()
+a.remove(3) : 요소 삭제, 없으면 에러
+a
+a.discard(2) : 요소 삭제, 없으면 넘어감
+a.discard(3)
+
+26.3.3 세트에서 임의의 요소를 삭제하기 : pop()
+a = {1, 2, 3, 4}
+a.pop() # 요소가 없으면 에러
+a
+
+26.3.4 세트의 모든 요소를 삭제하기 : clear()
+
+26.3.5 세트의 요소 개수 구하기 : len(세트)
+
+
+
+26.4 세트의 할당과 복사
+- copy()
+
+
+26.5 반복문으로 세트의 요소를 모두 출력하기
+a = {1, 2, 3, 4}
+for i in a:
+    print(i)
+
+- 세트는 순서없이 출력 (시행할때마다 다른 순서, 숫자로만 구성된 세트는 순서대로)
+
+
+26.6 세트 표현식 사용하기
+
+- {식 for 변수 in 반복가능한객체}
+- set(식 for 변수 in 반복가능한객체)
+
+a = {i for i in 'apple'}
+a
+
+26.6.1 세트 표현식에 if 조건문 사용하기
+
+- {식 for 변수 in 세트 if 조건식}
+- set(식 for 변수 in 세트 if 조건식)
+
+a = {i for i in 'pineapple' if i not in 'apl'}
+a
