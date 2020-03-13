@@ -1,0 +1,60 @@
+-----
+
+def hello():
+    print('Hello, world!')
+
+hello()
+
+-----
+
+def 함수이름(매개변수1, 매개변수2):
+    pass
+
+def add(a, b):
+    """이 함수는 a와 b를 더한 뒤 결과를 반환하는 함수입니다."""
+    return a + b
+
+x = add(10, 20)
+print(x)
+print(add.__doc__) # 함수의 __doc__으로 독스트링 출력
+
+- help(객체)
+help(add)
+
+-----
+
+def 함수이름(매개변수):
+    return 반환값
+
+def add(a, b):
+    return a + b
+
+----- 함수에서 값을 여러 개 반환하기 -----
+
+def 함수이름(매개변수):
+    return 반환값1, 반환값2
+
+def add_sub(a, b):
+    return a + b, a - b
+
+x, y = add_sub(10, 20)
+x
+y
+
+----- 함수의 호출 과정 알아보기 -----
+stack diagram
+
+def mul(a, b):
+    c = a * b
+    return c
+
+def add(a, b):
+    c = a + b
+    print(c)
+    d = mul(a, b)
+    print(d)
+
+x = 10
+y = 20
+add(x, y)
+
