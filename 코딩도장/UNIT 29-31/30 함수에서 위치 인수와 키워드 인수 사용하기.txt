@@ -1,0 +1,75 @@
+----- positional argument
+
+def print_numbers(a, b, c):
+    print(a)
+    print(b)
+    print(c)
+
+
+x = [10, 20, 30]
+print_numbers(*x)
+print_numbers(*[10, 20, 30])
+
+----- 가변 인수 함수 만들기
+
+def 함수이름(*매개변수):
+    코드
+
+def print_numbers(*args):
+    for arg in args:
+        print(arg)
+
+x = [10]
+print_numbers(*x)
+
+y = [10, 20, 30, 40]
+print_numbers(*y)
+
+----- keyword argument
+
+def personal_info(name, age, address):
+    print('이름: ', name)
+    print('나이: ', age)
+    print('주소: ', address)
+
+-> 순서가 달라지면 원하지 않는 결과
+
+- 함수(키워드=값)
+
+personal_info(name='홍길동', age=30, address='서울시 용산구 이촌동')
+personal_info(age=30, address='서울시 용산구 이촌동', name='홍길동')
+
+-----  키워드 인수와 딕셔너리 언패킹
+
+- 함수(**딕셔너리)
+
+x = {'name': '홍길동', 'age': 30, 'address': '서울시 용산구 이촌동'}
+personal_info(**x)
+
+----- 키워드 인수를 사용하는 가변 인수 함수 만들기
+
+- def 함수이름(**매개변수):
+    코드
+
+def personal_info(**kwargs):
+    for kw, arg in kwarg.item():
+        print(kw, ': ', arg, sep='')
+
+personal_info(name='홍길동')
+personal_info(name='홍길동', age=30, address='서울시 용산구 이촌동')
+
+x = {'name': '홍길동'}
+personal_info(**x)
+
+y = {'name': '홍길동', 'age': 30, 'address': '서울시 용산구 이촌동'}
+personal_info(**y)
+
+----- 매개변수에 초깃값 지정하기
+
+def 함수이름(매개변수=값):
+    코드
+
+def personal_info(name, age, address='비공개'):
+    print('이름: ', name)
+    print('나이: ', age)
+    print('주소: ', address)
