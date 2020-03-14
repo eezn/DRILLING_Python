@@ -1,0 +1,31 @@
+-----
+
+# 무한 출력 주의
+def hello():
+    print('Hello, world!')
+    hello()
+
+-----
+
+def hello(count):
+    if count == 0:
+        return
+
+    print('Hello, world!', count)
+
+    count -= 1
+    hello(count)
+
+hello(5)
+
+-----
+
+def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(5))
+
+-----
+
