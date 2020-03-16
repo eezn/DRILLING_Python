@@ -1,0 +1,197 @@
+----- 33.1 변수의 사용 범위
+
+x = 10 # 전역변수
+def foo():
+    print(x) # 함수 바깥의 변수 출력
+
+foo()
+print(x)
+
+-----
+
+def foo()
+    x = 10 # foo의 지역변수
+    print(x)
+
+foo()
+print(x)
+
+
+----- 함수 안에서 전역변수 변경하기
+
+x = 10
+def foo():
+    x = 20
+    print(x)
+
+foo()
+print(x)
+
+# 20
+# 10
+
+-----
+
+- global 전역변수
+
+x = 10
+def foo():
+    global x
+    x = 20
+    print(x)
+
+foo() 
+print(x)
+
+# 20
+# 20
+
+-----
+
+def foo():
+    global x
+    x = 20
+    print(x)
+
+foo()
+print(x)
+
+
+----- locals()
+
+x = 10
+locals()
+
+'__name__': '__main__'
+'__doc__': None
+'__package__': None
+'__loader__': <class '_frozen_importlib.BuiltinImporter'>
+'__spec__': None
+'__annotations__': {}
+'__builtins__': <module 'builtins' (built-in)>
+'x': 10
+
+
+
+----- 33.2 함수 안에 함수
+----- 33.2.1 지역 변수의 범위
+
+def 함수이름1():
+    코드
+    def 함수이름2():
+        코드
+
+def print_hello():
+    hello = 'Hello world!'
+    def print_message():
+        print(hello)
+    print_message()
+
+print_hello() 
+
+
+----- 32.2.2 지역 변수 변경하기
+
+def A():
+    x = 10
+    def B():
+        x = 20
+
+    B()
+    print(x)
+
+A() # 10
+
+-----
+
+def A():
+    x = 10
+    def B():
+        nonlocal x
+        x = 20
+
+    B()
+    print(x)
+
+A() # 20
+
+
+----- 33.2.3 nonlocal이 변수를 찾는 순서
+
+def A():
+    x = 10
+    y = 100
+    def B():
+        x = 20
+        def C():
+            nonlocal x
+            nonlocal y
+            x += 30
+            y += 300
+            print(x, end=' ')
+            print(y)
+        C()
+    B()
+
+A() # 50 400
+
+
+----- global로 전역 변수 사용하기
+
+x = 1
+def A():
+    x = 10
+    def B():
+        x = 20
+        def C():
+            global x
+            x += 30
+            print(x)
+        C()
+    B()
+
+A() # 31
+
+
+----- 33.3 클로저 사용하기 : closure
+
+def calc():
+    a = 3
+    b = 5
+    def mul_add(x):
+        return a * x + b
+    return mul_add
+
+c = calc()
+print(c(1), c(2), c(3), c(4), c(5))
+
+# 8 11 14 17 20
+
+----- 33.3.1 lambda로 closure 만들기
+
+def calc():
+    a = 3
+    b = 5
+    return lambda x: a * x + b
+
+c = calc()
+print(c(1), c(2), c(3), c(4), c(5))
+
+
+
+----- 33.3.2 클로저의 지역 변수 변경하기
+
+def calc():
+    a = 3
+    b = 5
+    total = 0
+    def mul_add(x):
+        nonlocal total
+        total += a * x + b
+        print(total)
+    return mul_add
+
+c = calc()
+c(1) # 8
+c(2) # 19
+c(3) # 33
