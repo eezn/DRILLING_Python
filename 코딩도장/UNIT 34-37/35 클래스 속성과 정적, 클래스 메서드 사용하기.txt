@@ -1,0 +1,115 @@
+----- 35.1.1 클래스 속성 사용하기
+
+class 클래스이름:
+    속성 = 값
+
+class Person:
+    bag = []
+
+    def put_bag(self, stuff):
+        self.bag.append(stuff)
+
+james = Person()
+james.put_bag('책')
+
+maria = Person()
+maria.put_bag('열쇠')
+
+print(james.bag)
+print(maria.bag)
+
+# ['책', '열쇠']
+# ['책', '열쇠']
+# 클래스 속성은 클래스에 속해 있으며 모든 인스턴스에서 공유
+
+-----
+
+class Person:
+    bag = []
+
+    def put_bag(self, stuff):
+        self.bag.append(stuff)
+
+- 클래스.속성
+
+class Person:
+    bag = []
+
+    def put_bag(self, stuff):
+        Person.bag.append(stuff) # 클래스 이름으로 클래스 속성에 접근
+
+
+----- 35.1.3 비공개 클래스 속성 사용하기
+
+class 클래스이름:
+    __속성 = 값
+
+class Knight:
+    __item_limit = 10
+
+    def print_item_limit(self):
+        print(Knight.__item_limit)
+
+x = Knight()
+x.print_item_limit() # 10
+
+print(Knight.__item_limit) # 클래스 바깥에서는 접근할 수 없음
+
+---- 클래스와 메서드의 독스트링 사용하기
+
+class Person():
+    '''사람 클래스입니다.'''
+
+    def greeting(self):
+        '''인사 메서드입니다.'''
+        print('Hello')
+
+print(Person.__doc__)
+print(Person.greeting.__doc__)
+
+maria = Person()
+print(maria.greeting.__doc__)
+
+
+
+----- 35.2 정적 메서드 사용하기
+
+class Calc:
+    @staticmethod
+    def add(a, b):
+        print(a + b)
+
+    @staticmethod
+    def mul(a, b):
+        print(a * b)
+
+Calc.add(10, 20)
+Calc.mul(10, 20)
+
+# 정적 메서드는 인스턴스의 상태를 변화시키지 않는 메서드를 만들 때 사용
+
+
+----- 35.3 클래스 메서드 사용하기
+
+class 클래스이름:
+    @classmethod
+    def 메서드(cls, 매개변수1, 매개변수2):
+        코드
+
+class Person:
+    count = 0
+
+    def __init__(self):
+        Person.count += 1
+
+    
+    @classmethod
+    def print_count(cls):
+    print('{0}명 생성되었습니다.'.format(cls.count))
+
+james = Person()
+maria = Person()
+
+Person.print_count() # 2명 생성되었습니다.
+
+# 클래스 메서드는 메서드 안에서 클래스 속성, 클래스 메서드에 접근해야 할 때 사용
