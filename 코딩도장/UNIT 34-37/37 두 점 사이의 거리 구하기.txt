@@ -1,0 +1,63 @@
+----- 37.1.1 클래스로 점 구현하기
+
+class Point2D:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+class Point2D:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+p1 = Point2D(x=30, y=20)
+p2 = Point2D(x=60, y=50)
+
+print('p1: {} {}'.format(p1.x, p1,y))
+print('p2: {} {}'.format(p2.x, p2.y))
+
+
+----- 37.1.2 피타고라스의 정리로 두 점의 거리 구하기
+
+ import math
+
+class Point2D:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+p1 = Point2D(x=30, y=20)
+p2 = Point2D(x=60, y=50)
+
+a = p2.x - p1.x
+b = p2.y - p1.y
+
+c = math.sqrt((a * a) + (b * b))
+d = math.sqrt(math.pow(a, 2) + math.pow(b, 2))
+e = math.sqrt((a ** 2) + (b ** 2))
+
+print(c)
+print(d)
+print(e)
+
+
+----- namedtuple 사용하기 (collection 모듈)
+
+- 클래스 = collection.namedtuple('자료형이름', ['요소이름1', '요소이름2'])
+
+import math
+import collection
+
+Point2D = collection.namedtuple('Point2D', ['x', 'y'])
+
+p1 = Point2D(x=30, y=20)
+p2 = Point2D(x=60, y=50)
+
+a = p1.x - p2.x
+b = p1.y - p2.y
+
+c = math.sqrt((a**2) + (b**2))
+print(c)
