@@ -1,0 +1,97 @@
+39. 이터레이터
+
+----- 39.1 반복 가능한 객체 알아보기
+
+- dir(객체)
+
+dir([1, 2, 3])
+[1, 2, 3].__iter__()
+
+it = [1, 2, 3].__iter__()
+it.__next__()
+
+----- 39.1.1 for와 반복 가능한 객체
+
+----- 39.2 이터레이터 만들기
+
+class 이터레이터이름:
+    def __iter__(self):
+        코드
+
+    def __next__(self):
+        코드
+
+
+class Counter:
+    def __init__(self, stop):
+        self.current = 0
+        self.stop = stop
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.current < self.stop:
+            r = self.current 
+            self.current += 1
+            return r
+        else:
+            raise StopIteration
+
+for i in Counter(3):
+    print(i, end=' ')
+
+
+----- 39.2.1 이터레이터 언패킹
+
+a, b, c = Counter(3)
+print(a, b, c)
+a, b, c, d, e = Counter(5)
+print(a, b, c, d, e)
+
+
+----- 39.3 인덱스로 접근할 수 있는 이터레이터 만들기
+
+class 이터레이터이름:
+    def __getitem__(self, 인덱스):
+        코드
+
+
+class Counter:
+    def__init__(self, stop):
+        self.stop = stop
+
+    def __getitem__(self, index):
+        if index < self.stop:
+            return index
+        else:
+            raise IndexError
+
+print(Counter(3)[0], Counter(3)[1], Counter(3)[2])
+
+for i in Counter(3):
+    print(i, ens=' ')
+
+
+
+----- iter, next 함수 활용하기
+
+it = range(3)
+it.__iter__() # iter(range(3))
+it.__next__() # next(it)
+
+- iter(호출가능한객체, 반복을끝낼값)
+
+import random
+it = iter(lambda : random.randint(0, 5), 2)
+next(it)
+
+import random
+
+while True:
+    i = random.randint(0, 5)
+    if i == 2:
+        break
+    print(i, end=' ')
+
+
