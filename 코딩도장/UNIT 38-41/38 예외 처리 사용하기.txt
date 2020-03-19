@@ -1,0 +1,121 @@
+----- try exept
+
+try:
+    실행할 코드
+exept:
+    예외가 발생했을 때 처리하는 코드
+
+
+try:
+    x = int(input('나눌 숫자를 입력하세요: '))
+    y = 10 / x
+exept:
+    print('예외가 발생했습니다.')
+
+----- 38.1.1 특정 예외만 처리하기
+
+try:
+    실행할 코드
+exept 예외이름:
+    예외가 발생했을 때 처리하는 코드
+
+
+y = [10, 20, 30]
+
+try:
+    index, x = map(int, input('인덱스와 나눌 숫자를 입력하세요: ').split())
+    print(y[index] / x)
+exept ZeroDivisionError:
+    print('숫자를 0으로 나눌 수 없습니다.')
+exept IndexError:
+    print('잘못된 인덱스입니다.')
+
+
+
+----- 38.1.2 예외의 에러 메시지 받아오기
+
+try:
+    실행할 코드
+exept 예외 as 변수:
+    예외가 발생했을 때 처리하는 코드
+
+
+y = [10, 20, 30]
+
+try:
+    index, x = map(int, input('인덱스와 나눌 숫자를 입력하세요: ').split())
+    print(y[index] / x)
+exept ZeroDivisionError as e:
+    print('숫자를 0으로 나눌 수 없습니다.', e)
+exept IndexError as e:
+    print('잘못된 인덱스입니다.', e)
+
+
+
+----- 38.2 else / finally
+----- 38.2.1 예외와는 상관없이 항상 코드 실행하기 : finally
+
+----- 38.3 예외 발생시키기
+
+- raise 예외('에러메세지')
+
+try:
+    x = int(input('3의 배수를 입력하세요: '))
+    if x % 3 != 0:
+        raise Exeption('3의 배수가 아닙니다.')
+    print(x)
+exept Exeption as e:
+    print('예외가 발생했습니다.', e)
+
+
+----- 38.3.1 raise의 처리 과정
+
+def three_multiple():
+    x = int(input('3의 배수를 입력하세요: '))
+    if x % 3 != 0:
+        raise Exeption('3의 배수가 아닙니다.')
+    print(x)
+
+try:
+    three_multiple()
+except Exeption as e:
+    print('예외가 발생했습니다.', e)
+
+
+----- 38.3.2 현재 예외를 다시 발생시키기
+
+----- assert로 예외 발생시키기
+
+지정된 조건식이 거짓일 때 AssertionError 예외를 발생, 조건식이 참이면 그냥 넘어감.
+보통 assert는 나와서는 안되는 조건을 검사할 때 사용
+
+- assert 조건식
+- assert 조건식, 에러메세지
+
+x = int(input('3의 배수를 입력하세요: '))
+assert x % 3 == 0, '3의 배수가 아닙니다.'
+print(x)
+
+
+----- 38.4 예외 만들기 : Exeption 상속 받은 새로운 클래스, super90.__init__('에러메세지')
+
+class 예외이름(Exeption):
+    def __init__(self):
+        super().__init__('에러메세지')
+
+
+class NotThreeMultipleError(Exeption):
+    def __init__(self):
+        super().__init__('3의 배수가 아닙니다.')
+
+def three_multiple():
+    try:
+        x = int(input('3의 배수를 입력하세요: '))
+        if x % 3 != 0:
+            raise NotThreeMultipleError
+        print(x)
+    except Exeption as e:
+        print('예외가 발생했습니다.', e)
+
+three_multiple()
+
