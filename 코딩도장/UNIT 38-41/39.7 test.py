@@ -10,6 +10,7 @@ if value >= 86400:
 print(value)
 
 # '초'로 주어진 시간 시:분:초 로 만들기
+# 조잡
 sec = value % 60
 minute = (value - sec) // 60
 
