@@ -1,0 +1,130 @@
+----- 41.1 코루틴에 값 보내기
+
+- 코루틴객체.send(값)
+- 변수.(yield)
+- next(코루틴객체) : 최초 실행
+
+def number_corutine():
+    while True:
+        x = (yield)
+        print(x)
+
+co = number_corutine()
+next(co)
+
+co.send(1) # 1
+co.send(2) # 2
+co.send(3) # 3
+
+
+----- 41.2 코루틴 바깥으로 값 전달하기
+
+- 변수 = (yield 변수)
+- 변수 = next(코루틴객체)
+- 변수 = 코루틴객체.send(값)
+
+def sum_corutine():
+    total = 0
+    while True:
+        x = (yield total)
+        total += x
+
+co = sum_corutine()
+print(next(co))
+
+print(co.send(1))
+print(co.send(2))
+print(co.send(3))
+
+----- 41.3 코루틴을 종료하고 예외 처리하기
+
+- 코루틴객체.close()
+
+def number_corutine():
+    while True:
+        x = (yield)
+        print(x, end=' ')
+
+co = number_corutine()
+next(co)
+
+for i in range(20):
+    co.send(i)
+
+co.close()
+
+
+
+----- 41.3.1 GeneratorExit 예외 처리하기
+
+def number_corutine():
+    try:
+        while True:
+            x = (yield)
+            print(x, end=' ')
+    except GeneratorExit:
+        print()
+        print('코루틴 종료'
+        
+co = number_corutine()
+next(co)
+
+for i in range(20):
+    co.send(i)
+
+co.close()
+
+
+----- 41.3.2 코루틴 안에 예외 발생시키기
+
+- 코루틴객체.throw(예외이름, 에러메세지)
+
+def sum_corutine():
+    try:
+        total = 0
+        while True:
+            x = (yield)
+            total += x
+    except RuntimeError as e:
+        print(e)
+        yield total
+
+co = sum_corutine()
+next(co)
+
+for i in range(20):
+    co.send(i)
+    print(i)
+
+print(co.throw(RuntimeError, '예외로 코루틴 끝내기'))
+
+
+
+----- 41.4 하위 코루틴의 반환값 가져오기
+
+def accumulate():
+    total = 0
+    while True:
+        x = (yield)
+        if x is None:
+            return total
+        total += x
+
+def sum_corutine():
+    while True:
+        total = yield from accumulate()
+        print(total)
+
+co = sum_corutine()
+next(co)
+
+for i in range(1, 11):
+    co.send(i)
+co.send(None)
+
+for i in range(1, 101):
+    co.send(i)
+co.send(None)
+
+
+----- pass
